@@ -23,6 +23,7 @@ import ContactUs from "../pages/Contactus";
 
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -30,13 +31,15 @@ function Header() {
 
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
+    const role = localStorage.getItem("userRole");
     setIsLoggedIn(!!authToken);
+    setUserRole(role);
   }, []);
 
   const handleLogout = () => {
     localStorage.clear();
     setIsLoggedIn(false);
-    navigate("/login");
+    setTimeout(() => navigate("/login"), 0);
   };
 
   const handleMenuOpen = (event) => {
@@ -82,12 +85,17 @@ function Header() {
             <ListItemText primary="Sign Up" />
           </ListItem>
           <ListItem button onClick={() => navigate("/home")}>
-        <ListItemText primary="Home" />
-      </ListItem>
+            <ListItemText primary="Home" />
+          </ListItem>
         </>
       ) : (
         <>
-          <ListItem button>
+          {userRole === "Admin" && (
+            <ListItem button onClick={() => navigate("/contactlist")}>
+              <ListItemText primary="ContactList" />
+            </ListItem>
+          )}
+          <ListItem button onClick={() => navigate("/dashboard")}>
             <ListItemText primary="Dashboard" />
           </ListItem>
           <ListItem button onClick={handleLogout}>
@@ -135,13 +143,14 @@ function Header() {
           <Button color="inherit" onClick={handleOpenDialog}>Contact Us</Button>
           {!isLoggedIn ? (
             <>
-              <Button color="inherit" onClick={() => navigate("/home")}>Home</Button>
+              <Button color="inherit" onClick={() => navigate("/")}>Home</Button>
               <Button color="inherit" onClick={() => navigate("/login")}>Login</Button>
               <Button color="inherit" onClick={() => navigate("/signin")}>Sign Up</Button>
             </>
           ) : (
             <>
-            <Button color="inherit"  onClick={() => navigate("/dashboard")}>Dashboard</Button>
+              <Button color="inherit" onClick={() => navigate("/dashboard")}>Dashboard</Button>
+              {userRole === "Admin" && <Button color="inherit">Contact List</Button>}
               <Button color="inherit" onClick={handleLogout}>Logout</Button>
               <IconButton color="inherit" onClick={handleMenuOpen}>
                 <AccountCircle />
