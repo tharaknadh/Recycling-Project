@@ -24,7 +24,7 @@ import Event from "../pages/Event";
 import BarChart from "../pages/BarChart";
 import Stories from "../pages/Stories";
 
-function Header() {
+function AdminHeader() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
@@ -39,7 +39,7 @@ function Header() {
   const handleLogout = () => {
     localStorage.clear();
     setIsLoggedIn(false);
-    navigate("/login");
+    navigate("/home");
   };
 
   const handleMenuOpen = (event) => {
@@ -82,7 +82,7 @@ function Header() {
         <ListItemText primary="Dashboard" />
       </ListItem>
       <ListItem button onClick={handleOpenDialog}>
-        <ListItemText primary="Contact Us" />
+        <ListItemText primary="UserSupport" />
       </ListItem>
       {!isLoggedIn ? (
         <>
@@ -130,7 +130,7 @@ function Header() {
   );
 
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="static" color="secondary">
       <Toolbar>
         <IconButton edge="start" color="inherit" aria-label="logo" onClick={() => navigate("/home")}>
           <img
@@ -144,7 +144,7 @@ function Header() {
         </Typography>
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           <Button color="inherit"  onClick={() => navigate("/dashboard")}>Dashboard</Button>
-          <Button color="inherit" onClick={handleOpenDialog}>Contact Us</Button>
+          <Button color="inherit" onClick={()=>navigate("/queries")}>Queries</Button>
           {!isLoggedIn ? (
             <>
               <Button color="inherit" onClick={() => navigate("/home")}>Home</Button>
@@ -195,4 +195,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default AdminHeader;

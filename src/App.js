@@ -11,6 +11,12 @@ import Feedback from './pages/FeedBack';
 import ContactList from './pages/ContactList';
 import NotFound from './pages/NotFound';
 import Dashboard from './pages/Dashboard';
+import Event from './pages/Event';
+import BarChart from './pages/BarChart';
+import Stories from './pages/Stories';
+import Donation from './pages/Donation';
+import AdminHome from './pages/AdminHome';
+import Ideas from './pages/Ideas';
 
 function App() {
   return (
@@ -20,7 +26,7 @@ function App() {
           path="/login"
           element={
             localStorage.getItem("authToken") ? (
-              <Navigate to="/home" replace />
+              <Navigate to="/dashboard" replace />
             ) : (
               <Login />
             )
@@ -30,7 +36,7 @@ function App() {
           path="/signin"
           element={
             localStorage.getItem("authToken") ? (
-              <Navigate to="/home" replace />
+              <Navigate to="/dashboard" replace />
             ) : (
               <Signin />
             )
@@ -40,7 +46,7 @@ function App() {
           path="/"
           element={
             localStorage.getItem("authToken") ? (
-              <Navigate to="/home" replace />
+              <Navigate to="/dashboard" replace />
             ) : (
               <Home />
             )
@@ -48,15 +54,21 @@ function App() {
         />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/feedback" element={<Feedback />} />
-        <Route path="/home" element={<Home/>}/>
+        <Route path="/donation" element={<Donation/>}/>
         <Route path="/aboutUs" element={<PrivateRoute element={<About />} />} />
-        <Route path="/dashboard" element={<PrivateRoute element={<Dashboard/>}/>} />
+        <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/list" element={<ContactList/>}/>
+        <Route path="/event" element={<Event/>}/>
+        <Route path="/chart" element={<BarChart/>}/>
+        <Route path="/stories" element={<Stories/>}/>
+        <Route path="/admin" element={<AdminHome/>}/>
+        <Route path="/ideas" element={<Ideas/>}/>
+
         <Route
           path="*"
           element={
             localStorage.getItem("authToken") ? (
-              <Navigate to="/home" />
+              <Navigate to="/dashboard" />
             ) : (
               <NotFound />
             )

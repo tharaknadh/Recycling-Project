@@ -1,25 +1,23 @@
-import React from 'react';
+import React from 'react'
 import { Box, Container, Grid, Typography } from '@mui/material';
 import Carousel from 'react-bootstrap/Carousel';
 import '../css/Body.css';
 import Chatbot from './Chatbot';
-import UserContribution from './UserContribution';
+import Adminview from './Adminview';
 import '../css/Chart.css';
-
-function Body() {
- 
+function BodyAdmin() {
   return (
     <Container className="body-container" sx={{ mt: 4 }}>
       <Box display="flex" justifyContent="center">
         <video
-          src={require('../asserts/recycle.mp4')}
+          src={require('../asserts/recycle.mp4')} 
           autoPlay
           loop
           muted
           style={{ width: '100%', height: 'auto' }}
         />
       </Box>
-      {/* About Section */}
+      
       <Grid container spacing={4} sx={{ mt: 4 }}>
         <Grid item xs={12}>
           <Typography variant="h4" component="h2">
@@ -35,108 +33,103 @@ function Body() {
           </Typography>
         </Grid>
       </Grid>
-      <Grid container spacing={4} sx={{ mt: 4 }}>
-        <Grid item xs={12} md={6}>
-          <UserContribution />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <div className="video-container">
-          <h2 className="user-contribution-title">Video Tutorials</h2>
-            <iframe 
-              width="100%" 
-              height="270" 
-              src="https://www.youtube.com/embed/ZJxoMaOzkTI?si=3Z6tJ3sgDG3P2W3H" 
-              title="YouTube video player" 
-              frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowFullScreen
-            />
-          </div>
-        </Grid>
-      </Grid>
-      <Typography variant="h4" component="h2" style={{padding:"20px"}}>Here Some Products from Plastic Recycle</Typography>
+      
+      
+          <Adminview />
+        
       <Carousel interval={3000} wrap={false}>
          <Carousel.Item>
            <img
+           style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/06-SugaMat-SOURCE-Suga.webp')}
             alt="Image 1"
-            className="carousel-image"
+            className="d-block w-100"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/Bouteille.jpg')}            
             alt="Image 2"
-            className="carousel-image"
+            className="d-block w-100"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/Rothys_logo.png')}
             alt="Image 3"
-            className="carousel-image"
+            className="d-block w-100"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/image4.jpg')}
             alt="Image 3"
-            className="carousel-image"
+            className="d-block w-100"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/image5.jpg')}
             alt="Image 3"
-            className="carousel-image"
+            className="d-block w-100"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/image6.jpg')}
             alt="Image 3"
-            className="carousel-image"
+            className="d-block w-100"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/images (1).jpeg')}
             alt="Image 3"
-            className="carousel-image"
+            className="d-block w-100"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/images (1).png')}
             alt="Image 3"
-            className="carousel-image"
+            className="d-block w-100"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/images (2).png')}
             alt="Image 3"
-            className="carousel-image"
+            className="d-block w-100"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/images (3).png')}
             alt="Image 3"
-            className="carousel-image"
+            className="d-block w-100"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/images.jpeg')}
             alt="Image 3"
-            className="carousel-image"
+            className="d-block w-100"
           />
         </Carousel.Item>
       </Carousel>
-      <Chatbot/>
+<Chatbot/>
     </Container>
-  );
+  )
 }
 
-export default Body;
+export default BodyAdmin

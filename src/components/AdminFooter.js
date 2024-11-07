@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Button, Typography, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import SocialMedia from './SocialMedia';
 
-function Footer() {
+function AdminFooter() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ function Footer() {
   }, []);
 
   return (
-    <AppBar position="static" color="primary" component="footer" sx={{ top: 'auto', bottom: 0 }}>
+    <AppBar position="static" color="secondary" component="footer" sx={{ top: 'auto', bottom: 0 }}>
       <Container>
         <Toolbar sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button color="inherit" component={Link} to="/aboutUs">
@@ -36,4 +36,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default AdminFooter;
