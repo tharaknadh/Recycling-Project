@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import "../css/Chart.css";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -45,7 +47,9 @@ function BarChart() {
   };
 
   useEffect(() => {
+    
     return () => {
+      
       if (window.Chart && window.Chart.instances) {
         window.Chart.instances.forEach(chartInstance => {
           chartInstance.destroy();
@@ -55,10 +59,15 @@ function BarChart() {
   }, []);
 
   return (
+    <>
+    <Header/>
     <div className="chart-container">
       <Bar data={data} options={options} />
     </div>
+    <Footer/>
+    </>
   );
+  
 }
 
 export default BarChart;

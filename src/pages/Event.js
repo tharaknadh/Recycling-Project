@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import '../css/Event.css';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 function Event() {
     
     const [submitted, setSubmitted] = useState(false); 
@@ -15,6 +17,8 @@ function Event() {
         
       };
   return (
+    <>
+    <Header/>
     <div className="page-container">
         <div className="event-details">
         <h1><center>Awarness on Plastic Recycling</center></h1>
@@ -58,6 +62,8 @@ function Event() {
         )}
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 

@@ -1,7 +1,11 @@
 import React from 'react';
 import "../css/Stories.css";
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 function Stories() {
   return (
+    <>
+    <Header/>
     <div className="stories-container">
       <h1>Inspiring Plastic Recycling Stories</h1>
       <p><b>1. Turning Plastic Waste into Playground Equipment</b>
@@ -23,6 +27,8 @@ function Stories() {
         An artist in Barcelona has made a name for himself by transforming ocean plastic waste into beautiful sculptures. Each piece he creates tells a story of ocean pollution and the impact of plastic on marine life. His exhibitions have not only drawn attention to the issue but also raised funds for ocean clean-up initiatives. His story is a testament to how art can be a powerful force for environmental awareness.
       </p>
     </div>
+    <Footer/>
+    </>
   );
 }
 
