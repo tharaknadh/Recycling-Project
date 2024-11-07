@@ -95,7 +95,7 @@ function Header() {
           <ListItem button onClick={() => navigate("/signin")}>
             <ListItemText primary="Sign Up" />
           </ListItem>
-          <ListItem button onClick={() => navigate("/home")}>
+          <ListItem button onClick={() => navigate("/homepage")}>
             <ListItemText primary="Home" />
           </ListItem>
         </>
@@ -154,11 +154,11 @@ function Header() {
           Plastic Recycling
         </Typography>
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Button color="inherit"  onClick={() => navigate("/dashboard")}>Dashboard</Button>
+          
           <Button color="inherit" onClick={handleOpenDialog}>Contact Us</Button>
           {!isLoggedIn ? (
             <>
-              <Button color="inherit" onClick={() => navigate("/")}>Home</Button>
+              <Button color="inherit" onClick={() => navigate("/homepage")}>Home</Button>
               <Button color="inherit" onClick={() => navigate("/login")}>Login</Button>
               <Button color="inherit" onClick={() => navigate("/signin")}>Sign Up</Button>
             </>

@@ -17,6 +17,7 @@ import Stories from './pages/Stories';
 import Donation from './pages/Donation';
 import AdminHome from './pages/AdminHome';
 import Ideas from './pages/Ideas';
+import Homepage from './pages/Homepage';
 
 function App() {
   // Helper function to check if a user is logged in and get their role
@@ -76,6 +77,7 @@ function App() {
         <Route path="/stories" element={<Stories/>}/>
         <Route path="/admin" element={<AdminHome/>}/>
         <Route path="/ideas" element={<Ideas/>}/>
+        <Route path="homepage" element={<Homepage/>}/>
 
         <Route
           path="*"
