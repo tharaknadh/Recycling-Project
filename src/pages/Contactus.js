@@ -4,10 +4,11 @@ import { firestore } from '../service/firebase'; // Import your Firestore instan
 import { collection, addDoc } from 'firebase/firestore';
 import { getDocs, query } from 'firebase/firestore';
 
-const ContactUs = ({ open, onClose }) => {
+const Contactus = ({ open, onClose }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [modeOfContact, setModeOfContact] = useState('');
+  const [reason, setReason] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,12 +17,14 @@ const ContactUs = ({ open, onClose }) => {
       email,
       modeOfContact,
       timestamp: new Date(),
+      reason
     };
     try {
       await addDoc(collection(firestore, 'ContactUs'), contactData);
       setName('');
       setEmail('');
       setModeOfContact('');
+      setReason('');
       onClose();
     } catch (error) {
       console.error('Error submitting contact form:', error);
@@ -60,6 +63,15 @@ const ContactUs = ({ open, onClose }) => {
             onChange={(e) => setModeOfContact(e.target.value)}
             required
           />
+          <TextField
+            label="Reason"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+            required
+          />
           <DialogActions>
             <Button onClick={onClose} color="secondary">
               Cancel
@@ -74,5 +86,5 @@ const ContactUs = ({ open, onClose }) => {
   );
 };
 
-export default ContactUs;
+export default Contactus;
 
