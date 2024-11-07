@@ -24,9 +24,8 @@ import Event from "../pages/Event";
 import BarChart from "../pages/BarChart";
 import Stories from "../pages/Stories";
 
-function Header() {
+function AdminHeader() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userRole, setUserRole] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -34,15 +33,13 @@ function Header() {
 
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
-    const role = localStorage.getItem("userRole");
     setIsLoggedIn(!!authToken);
-    setUserRole(role);
   }, []);
 
   const handleLogout = () => {
     localStorage.clear();
     setIsLoggedIn(false);
-    setTimeout(() => navigate("/login"), 0);
+    navigate("/home");
   };
 
   const handleMenuOpen = (event) => {
@@ -85,7 +82,7 @@ function Header() {
         <ListItemText primary="Dashboard" />
       </ListItem>
       <ListItem button onClick={handleOpenDialog}>
-        <ListItemText primary="Contact Us" />
+        <ListItemText primary="UserSupport" />
       </ListItem>
       {!isLoggedIn ? (
         <>
@@ -96,19 +93,11 @@ function Header() {
             <ListItemText primary="Sign Up" />
           </ListItem>
           <ListItem button onClick={() => navigate("/home")}>
-            <ListItemText primary="Home" />
-          </ListItem>
+        <ListItemText primary="Home" />
+      </ListItem>
         </>
       ) : (
         <>
-          {userRole === "Admin" && (
-            <ListItem button onClick={() => navigate("/contactlist")}>
-              <ListItemText primary="ContactList" />
-            </ListItem>
-          )}
-          <ListItem button onClick={() => navigate("/dashboard")}>
-            <ListItemText primary="Dashboard" />
-          </ListItem>
           <ListItem button onClick={handleLogout}>
             <ListItemText primary="Logout" />
           </ListItem>
@@ -141,7 +130,7 @@ function Header() {
   );
 
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="static" color="secondary">
       <Toolbar>
         <IconButton edge="start" color="inherit" aria-label="logo" onClick={() => navigate("/home")}>
           <img
@@ -155,17 +144,15 @@ function Header() {
         </Typography>
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           <Button color="inherit"  onClick={() => navigate("/dashboard")}>Dashboard</Button>
-          <Button color="inherit" onClick={handleOpenDialog}>Contact Us</Button>
+          <Button color="inherit" onClick={()=>navigate("/queries")}>Queries</Button>
           {!isLoggedIn ? (
             <>
-              <Button color="inherit" onClick={() => navigate("/")}>Home</Button>
+              <Button color="inherit" onClick={() => navigate("/home")}>Home</Button>
               <Button color="inherit" onClick={() => navigate("/login")}>Login</Button>
               <Button color="inherit" onClick={() => navigate("/signin")}>Sign Up</Button>
             </>
           ) : (
             <>
-              <Button color="inherit" onClick={() => navigate("/dashboard")}>Dashboard</Button>
-              {userRole === "Admin" && <Button color="inherit">Contact List</Button>}
               <Button color="inherit" onClick={handleLogout}>Logout</Button>
               <IconButton color="inherit" onClick={handleMenuOpen}>
                 <AccountCircle />
@@ -208,4 +195,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default AdminHeader;
