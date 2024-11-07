@@ -13,6 +13,8 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function ContactList() {
   const [contacts, setContacts] = useState([]);
@@ -40,6 +42,8 @@ export default function ContactList() {
   }, []);
 
   return (
+    <> 
+    <Header/>
     <TableContainer component={Paper} style={{ marginTop: '20px', padding: '16px' }}>
       <Typography variant="h6" align="center" gutterBottom>
         Contact List
@@ -63,5 +67,8 @@ export default function ContactList() {
         </TableBody>
       </Table>
     </TableContainer>
+    <Footer/>
+    </>
+   
   );
 }

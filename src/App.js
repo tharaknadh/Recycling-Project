@@ -20,7 +20,7 @@ function App() {
           path="/login"
           element={
             localStorage.getItem("authToken") ? (
-              <Navigate to="/dashboard" replace />
+              <Navigate to="/home" replace />
             ) : (
               <Login />
             )
@@ -30,7 +30,7 @@ function App() {
           path="/signin"
           element={
             localStorage.getItem("authToken") ? (
-              <Navigate to="/dashboard" replace />
+              <Navigate to="/home" replace />
             ) : (
               <Signin />
             )
@@ -40,7 +40,7 @@ function App() {
           path="/"
           element={
             localStorage.getItem("authToken") ? (
-              <Navigate to="/dashboard" replace />
+              <Navigate to="/home" replace />
             ) : (
               <Home />
             )
@@ -48,14 +48,15 @@ function App() {
         />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/feedback" element={<Feedback />} />
+        <Route path="/home" element={<Home/>}/>
         <Route path="/aboutUs" element={<PrivateRoute element={<About />} />} />
-        <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/dashboard" element={<PrivateRoute element={<Dashboard/>}/>} />
         <Route path="/list" element={<ContactList/>}/>
         <Route
           path="*"
           element={
             localStorage.getItem("authToken") ? (
-              <Navigate to="/dashboard" />
+              <Navigate to="/home" />
             ) : (
               <NotFound />
             )
