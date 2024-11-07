@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Container, Grid, Typography } from '@mui/material';
 import Carousel from 'react-bootstrap/Carousel';
+import "../css/Body.css";
 
 function Body() {
  
@@ -8,11 +9,11 @@ function Body() {
     <Container className="body-container" sx={{ mt: 4 }}>
       <Box display="flex" justifyContent="center">
         <video
-          src={require('../asserts/recycle.mp4')} // Replace with your video URL
+          src={require('../asserts/recycle.mp4')}
           autoPlay
           loop
           muted
-          style={{ width: '100%', height: 'auto' }} // Adjust width as needed
+          style={{ width: '100%', height: 'auto' }}
         />
       </Box>
       {/* About Section */}
@@ -31,97 +32,86 @@ function Body() {
           </Typography>
         </Grid>
       </Grid>
+      <Typography variant="h4" component="h2" style={{padding:"20px"}}>Here Some Products from Plastic Recycle</Typography>
       <Carousel interval={3000} wrap={false}>
          <Carousel.Item>
            <img
-           style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/06-SugaMat-SOURCE-Suga.webp')}
             alt="Image 1"
-            className="d-block w-100"
+            className="carousel-image"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
-          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/Bouteille.jpg')}            
             alt="Image 2"
-            className="d-block w-100"
+            className="carousel-image"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
-          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/Rothys_logo.png')}
             alt="Image 3"
-            className="d-block w-100"
+            className="carousel-image"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
-          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/image4.jpg')}
             alt="Image 3"
-            className="d-block w-100"
+            className="carousel-image"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
-          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/image5.jpg')}
             alt="Image 3"
-            className="d-block w-100"
+            className="carousel-image"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
-          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/image6.jpg')}
             alt="Image 3"
-            className="d-block w-100"
+            className="carousel-image"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
-          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/images (1).jpeg')}
             alt="Image 3"
-            className="d-block w-100"
+            className="carousel-image"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
-          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/images (1).png')}
             alt="Image 3"
-            className="d-block w-100"
+            className="carousel-image"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
-          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/images (2).png')}
             alt="Image 3"
-            className="d-block w-100"
+            className="carousel-image"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
-          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/images (3).png')}
             alt="Image 3"
-            className="d-block w-100"
+            className="carousel-image"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
-          style={{width:"100px !importent",height:"100px"}}
             src={require('../asserts/images.jpeg')}
             alt="Image 3"
-            className="d-block w-100"
+            className="carousel-image"
           />
         </Carousel.Item>
       </Carousel>
-
     </Container>
   );
 }

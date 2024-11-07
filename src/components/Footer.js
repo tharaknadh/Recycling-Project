@@ -11,7 +11,7 @@ function Footer() {
   }, []);
 
   return (
-    <AppBar position="static" color="primary" component="footer" sx={{ top: 'auto', bottom: 0 }}>
+    <AppBar position="fixed" color="primary" component="footer" sx={{ top: 'auto', bottom: 0 }}>
       <Container>
         <Toolbar sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button color="inherit" component={Link} to="/aboutUs">
