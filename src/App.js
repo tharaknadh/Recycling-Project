@@ -19,18 +19,25 @@ import AdminHome from './pages/AdminHome';
 import Ideas from './pages/Ideas';
 
 function App() {
+  // Helper function to check if a user is logged in and get their role
+  const isAuthenticated = () => localStorage.getItem("authToken");
+  const userRole = localStorage.getItem("userRole");
+
+  // Admin Route component to handle role-based routing
+  const AdminRoute = ({ element }) => (
+    isAuthenticated() && userRole === "Admin" ? element : <Navigate to="/notfound" replace />
+  );
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path="/login"
-          element={
-            localStorage.getItem("authToken") ? (
-              <Navigate to="/dashboard" replace />
-            ) : (
-              <Login />
-            )
-          }
+          element={isAuthenticated() ? <Navigate to="/dashboard" replace /> : <Login />}
+        />
+        <Route
+          path="/signin"
+          element={isAuthenticated() ? <Navigate to="/dashboard" replace /> : <Signin />}
         />
         <Route
           path="/signin"
@@ -42,15 +49,21 @@ function App() {
             )
           }
         />
-         <Route
+        <Route
           path="/"
-          element={
-            localStorage.getItem("authToken") ? (
-              <Navigate to="/dashboard" replace />
-            ) : (
-              <Home />
-            )
-          }
+          element={isAuthenticated() ? <Navigate to="/dashboard" replace /> : <Home />}
+        />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/aboutUs" element={<PrivateRoute element={<About />} />} />
+        <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
+        
+        {/* Admin-only route for ContactList */}
+        <Route path="/contactlist" element={<AdminRoute element={<ContactList />} />} />
+        
+        <Route
+          path="*"
+          element={isAuthenticated() ? <Navigate to="/dashboard" /> : <NotFound />}
         />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/feedback" element={<Feedback />} />
