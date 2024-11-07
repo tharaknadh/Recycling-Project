@@ -1,6 +1,8 @@
 import React from 'react';
 import "../css/Ideas.css";
 import { Typography, Card, CardContent, Container } from '@mui/material';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const ideasData = [
   {
@@ -29,6 +31,8 @@ const ideasData = [
 
 const Ideas = () => {
   return (
+    <>
+    <Header/>
     <Container maxWidth="md" style={{ marginTop: '20px' }}>
       <Typography variant="h3" gutterBottom>
         Ideas for Improving Plastic Recycling
@@ -52,6 +56,8 @@ const Ideas = () => {
         </Card>
       ))}
     </Container>
+    <Footer/>
+    </>
   );
 };
 
