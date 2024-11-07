@@ -36,7 +36,7 @@ function Header() {
   const handleLogout = () => {
     localStorage.clear();
     setIsLoggedIn(false);
-    navigate("/home");
+    navigate("/login");
   };
 
   const handleMenuOpen = (event) => {
@@ -70,9 +70,6 @@ function Header() {
         </IconButton>
       </ListItem>
       <Divider />
-      <ListItem button>
-        <ListItemText primary="Dashboard" />
-      </ListItem>
       <ListItem button onClick={handleOpenDialog}>
         <ListItemText primary="Contact Us" />
       </ListItem>
@@ -90,6 +87,9 @@ function Header() {
         </>
       ) : (
         <>
+          <ListItem button>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
           <ListItem button onClick={handleLogout}>
             <ListItemText primary="Logout" />
           </ListItem>
@@ -132,7 +132,6 @@ function Header() {
           Plastic Recycling
         </Typography>
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Button color="inherit"  onClick={() => navigate("/dashboard")}>Dashboard</Button>
           <Button color="inherit" onClick={handleOpenDialog}>Contact Us</Button>
           {!isLoggedIn ? (
             <>
@@ -142,6 +141,7 @@ function Header() {
             </>
           ) : (
             <>
+            <Button color="inherit"  onClick={() => navigate("/dashboard")}>Dashboard</Button>
               <Button color="inherit" onClick={handleLogout}>Logout</Button>
               <IconButton color="inherit" onClick={handleMenuOpen}>
                 <AccountCircle />
