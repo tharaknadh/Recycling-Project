@@ -6,7 +6,7 @@ function Stories() {
   return (
     <>
     <Header/>
-    <div className="stories-container">
+    <div className="stories-container" style={{height:"100vh",overflow: "auto"}}>
       <h1>Inspiring Plastic Recycling Stories</h1>
       <p><b>1. Turning Plastic Waste into Playground Equipment</b>
         In a small community in Nairobi, local activists and environmentalists have come together to transform plastic waste into playground equipment for schools. Using innovative techniques, they collect and process discarded plastic, molding it into slides, swings, and benches. Not only does this keep plastic out of landfills, but it also provides children with safe, colorful play areas. This project has inspired nearby communities to start similar initiatives, showing that small actions can lead to big changes.
@@ -31,5 +31,4 @@ function Stories() {
     </>
   );
 }
-
 export default Stories;

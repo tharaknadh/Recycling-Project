@@ -61,17 +61,15 @@ function App() {
         
         {/* Admin-only route for ContactList */}
         <Route path="/contactlist" element={<AdminRoute element={<ContactList />} />} />
+        {/* <Route path="/contactlist" element={<ContactList />}/> */}
         
         <Route
           path="*"
           element={isAuthenticated() ? <Navigate to="/dashboard" /> : <NotFound />}
         />
-        <Route path="/contactus" element={<ContactUs />} />
-        <Route path="/feedback" element={<Feedback />} />
         <Route path="/donation" element={<Donation/>}/>
         <Route path="/aboutUs" element={<PrivateRoute element={<About />} />} />
         <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/list" element={<ContactList/>}/>
         <Route path="/event" element={<Event/>}/>
         <Route path="/chart" element={<BarChart/>}/>
         <Route path="/stories" element={<Stories/>}/>

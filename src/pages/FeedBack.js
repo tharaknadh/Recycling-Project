@@ -60,7 +60,7 @@ function Feedback() {
   return (
     <div>
       <Header/>  
-      <div className="feedback-page">
+      <div className="feedback-page" style={{height:"100vh",overflow:"scroll"}}>
         <h2>Product Feedback</h2>
         <form onSubmit={handleSubmit} className="feedback-form">
           <label>

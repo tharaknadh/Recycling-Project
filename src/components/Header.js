@@ -30,6 +30,7 @@ function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [appBarColor, setAppBarColor] = useState('primary');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,6 +39,19 @@ function Header() {
     setIsLoggedIn(!!authToken);
     setUserRole(role);
   }, []);
+
+  useEffect(() => { 
+    const role = localStorage.getItem('userRole');
+    if (role !== userRole) {
+      setUserRole(role); 
+    }
+    if (role === 'Admin') { 
+      setAppBarColor('secondary'); 
+    } else { 
+      setAppBarColor('primary');
+    }
+  }, [userRole]);
+  
 
   const handleLogout = () => {
     localStorage.clear();
@@ -141,7 +155,7 @@ function Header() {
   );
 
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="static" color={appBarColor}>
       <Toolbar>
         <IconButton edge="start" color="inherit" aria-label="logo" onClick={() => navigate("/home")}>
           <img
@@ -165,7 +179,7 @@ function Header() {
           ) : (
             <>
               <Button color="inherit" onClick={() => navigate("/dashboard")}>Dashboard</Button>
-              {userRole === "Admin" && <Button color="inherit">Contact List</Button>}
+              {userRole === "Admin" && <Button color="inherit" onClick={() => navigate("/contactlist")}>Contact List</Button>}
               <Button color="inherit" onClick={handleLogout}>Logout</Button>
               <IconButton color="inherit" onClick={handleMenuOpen}>
                 <AccountCircle />

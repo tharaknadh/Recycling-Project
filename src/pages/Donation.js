@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import "../css/Donation.css";
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Donation() {
     const [donationAmount, setDonationAmount] = useState('');
@@ -18,7 +20,9 @@ function Donation() {
     }
   };
   return (
-    <div className="donation-container">
+    <>
+    <Header/>
+    <div className="donation-container" style={{height:"100vh"}}>
     <h2>Support Plastic Recycling</h2>
     <p>Your donations help fund plastic recycling initiatives, community clean-ups, and awareness campaigns. Every contribution makes a difference!</p>
     
@@ -50,6 +54,9 @@ function Donation() {
 
     {donationMessage && <p className="donation-message">{donationMessage}</p>}
   </div>
+    <Footer/>
+    </>
+   
   );
 }
 
