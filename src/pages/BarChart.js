@@ -61,7 +61,7 @@ function BarChart() {
   return (
     <>
     <Header/>
-    <div className="chart-container">
+    <div className="chart-container" style={{height:"100vh"}}>
       <Bar data={data} options={options} />
     </div>
     <Footer/>

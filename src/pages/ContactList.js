@@ -44,7 +44,7 @@ export default function ContactList() {
   return (
     <> 
     <Header/>
-    <TableContainer component={Paper} style={{ marginTop: '20px', padding: '16px' }}>
+    <TableContainer component={Paper} style={{ marginTop: '20px', padding: '16px' ,height:"100vh"}}>
       <Typography variant="h6" align="center" gutterBottom>
         Contact List
       </Typography>

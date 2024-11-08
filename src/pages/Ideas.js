@@ -33,7 +33,7 @@ const Ideas = () => {
   return (
     <>
     <Header/>
-    <Container maxWidth="md" style={{ marginTop: '20px' }}>
+    <Container maxWidth="md" style={{ marginTop: '20px',height:"100vh" }}>
       <Typography variant="h3" gutterBottom>
         Ideas for Improving Plastic Recycling
       </Typography>

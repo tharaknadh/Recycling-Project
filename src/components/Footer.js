@@ -5,14 +5,30 @@ import SocialMedia from './SocialMedia';
 
 function Footer() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState("");
+  const [appBarColor, setAppBarColor] = useState('primary');
 
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
+    const role = localStorage.getItem("userRole");
     setIsLoggedIn(!!authToken);
+    setUserRole(role);
   }, []);
 
+  useEffect(() => { 
+    const role = localStorage.getItem('userRole');
+    if (role !== userRole) {
+      setUserRole(role); 
+    }
+    if (role === 'Admin') { 
+      setAppBarColor('secondary'); 
+    } else { 
+      setAppBarColor('primary');
+    }
+  }, [userRole]);
+
   return (
-    <AppBar position="static" color="primary" component="footer" sx={{ top: 'auto', bottom: 0 }}>
+    <AppBar position="static" color={appBarColor} component="footer" sx={{ top: 'auto', bottom: 0 }}>
       <Container>
         <Toolbar sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button color="inherit" component={Link} to="/aboutUs">
