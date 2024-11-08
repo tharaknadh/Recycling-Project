@@ -91,6 +91,7 @@ const LoginPage = () => {
     adminKey: ''
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [showAdminKey, setShowAdminKey] = useState(false);
 
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -206,14 +207,24 @@ const LoginPage = () => {
           {/* Conditionally rendered Admin Key input */}
           {role === 'Admin' && (
             <TextField
-              label="Admin Key"
-              variant="outlined"
-              fullWidth
-              value={adminKey}
-              onChange={(e) => setAdminKey(e.target.value)}
-              error={!!errors.adminKey}
+            label="Admin Key"
+            type={showAdminKey ? 'text' : 'password'}
+            variant="outlined"
+            fullWidth
+            value={adminKey}
+            onChange={(e) => setAdminKey(e.target.value)}
+            error={!!errors.adminKey}
               helperText={errors.adminKey}
-            />
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setShowAdminKey(!showAdminKey)}>
+                    {showAdminKey ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
           )}
 
           <Button
