@@ -25,12 +25,15 @@
 
 
 .fab.fa-facebook {
-  color: #03050a;
+  color: white;
+  font-size: 16px;
 }
 
 .fab.fa-twitter {
-  color: #050d12;
+  color: white;
+  font-size: 16px;
 }
 .fab.fa-linkedin {
-  color:#050d12
+  color:white;
+  font-size: 16px;
 }
