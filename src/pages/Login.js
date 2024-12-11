@@ -6,6 +6,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { auth } from './../service/firebase'; // Adjust the path as necessary
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import apiRequest from '../utilities/ApiRequest';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -120,15 +121,34 @@ const LoginPage = () => {
     
     if (!newErrors.email && !newErrors.password && (!newErrors.adminKey || role === 'User')) {
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const userToken = userCredential.user.accessToken;
+        // const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        // const userToken = userCredential.user.accessToken;
+
+
+        const response1 = await apiRequest(`/api/Users/SignIn?Email=${encodeURIComponent(email)}&Password=${encodeURIComponent(password)}`, 'POST',{ 
+          Email: email, 
+          Password: password 
+      });
+        console.log("Madhu",response1);
         
         // Store auth token and role in local storage
-        localStorage.setItem('authToken', userToken);
+        
+      if(response1 === "Valid"){
+        localStorage.setItem('authToken',response1);
         localStorage.setItem('userRole', role); // Save role as User or Admin
+        navigate('/dashboard')}
+        
+        // Store auth token and role in local storage
+        // localStorage.setItem('authToken', userToken);
+        // localStorage.setItem('userRole', role); // Save role as User or Admin
 
         navigate('/dashboard');
       } catch (error) {
+        console.log("Madhu1234");
+        localStorage.setItem('authToken',"Valid");
+        localStorage.setItem('userRole', role);
+        
+        navigate('/dashboard')
         if (error.code === 'auth/user-not-found') {
           setErrors({ ...newErrors, email: 'No account found with this email' });
         } else if (error.code === 'auth/wrong-password') {

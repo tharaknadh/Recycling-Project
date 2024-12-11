@@ -15,9 +15,12 @@ import {
 } from '@mui/material';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { getApiRequest } from '../utilities/ApiRequest';
 
 export default function ContactList() {
   const [contacts, setContacts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   async function fetchContacts() {
     const contactsCollection = collection(firestore, 'ContactUs');
@@ -31,6 +34,25 @@ export default function ContactList() {
 
     return contacts;
   }
+
+
+  const fetchUsers = async () => {
+    console.log("Madhu1");
+    try {
+      console.log("Madhu3");
+      const response = await getApiRequest('/api/ContactUS',"GET");
+      console.log("Madhu2",response); 
+      // setUsers(response.data);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Error fetching users');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   useEffect(() => {
     const fetchContactsData = async () => {

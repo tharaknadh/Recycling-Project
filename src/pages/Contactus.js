@@ -3,6 +3,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } 
 import { firestore } from '../service/firebase'; // Import your Firestore instance
 import { collection, addDoc } from 'firebase/firestore';
 import { getDocs, query } from 'firebase/firestore';
+import apiRequest from '../utilities/ApiRequest';
 
 const Contactus = ({ open, onClose }) => {
   const [name, setName] = useState('');
@@ -15,17 +16,20 @@ const Contactus = ({ open, onClose }) => {
     const contactData = {
       name,
       email,
-      modeOfContact,
-      timestamp: new Date(),
+      ModeofContract: modeOfContact,
+      // timestamp: new Date(),
       reason
     };
     try {
-      await addDoc(collection(firestore, 'ContactUs'), contactData);
-      setName('');
-      setEmail('');
-      setModeOfContact('');
-      setReason('');
-      onClose();
+      // await addDoc(collection(firestore, 'ContactUs'), contactData);
+      const response1 = await apiRequest('/api/ContactUS/Create', 'POST', contactData);
+      if(response1){
+        setName('');
+        setEmail('');
+        setModeOfContact('');
+        setReason('');
+        onClose();
+      }
     } catch (error) {
       console.error('Error submitting contact form:', error);
     }

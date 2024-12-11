@@ -13,7 +13,7 @@ import {
   ListItem,
   ListItemText,
   Divider,
-  Box,
+  Box
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -30,7 +30,7 @@ function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [appBarColor, setAppBarColor] = useState('primary');
+  const [appBarColor, setAppBarColor] = useState("primary");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,18 +40,17 @@ function Header() {
     setUserRole(role);
   }, []);
 
-  useEffect(() => { 
-    const role = localStorage.getItem('userRole');
+  useEffect(() => {
+    const role = localStorage.getItem("userRole");
     if (role !== userRole) {
-      setUserRole(role); 
+      setUserRole(role);
     }
-    if (role === 'Admin') { 
-      setAppBarColor('secondary'); 
-    } else { 
-      setAppBarColor('primary');
+    if (role === "Admin") {
+      setAppBarColor("secondary");
+    } else {
+      setAppBarColor("primary");
     }
   }, [userRole]);
-  
 
   const handleLogout = () => {
     localStorage.clear();
@@ -76,7 +75,10 @@ function Header() {
   };
 
   const toggleDrawer = (open) => (event) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
     setDrawerOpen(open);
@@ -86,11 +88,10 @@ function Header() {
     handleMenuClose();
   };
 
-
   const renderMenuItems = () => (
     <List sx={{ width: 250 }}>
       <ListItem>
-        <IconButton onClick={toggleDrawer(false)} sx={{ ml: 'auto' }}>
+        <IconButton onClick={toggleDrawer(false)} sx={{ ml: "auto" }}>
           <CloseIcon />
         </IconButton>
       </ListItem>
@@ -116,8 +117,22 @@ function Header() {
       ) : (
         <>
           {userRole === "Admin" && (
-            <ListItem button onClick={() => navigate("/contactlist")}>
-              <ListItemText primary="ContactList" />
+            <ListItem>
+              <ListItemText
+                primary="ContactList"
+                onClick={() => navigate("/contactlist")}
+                style={{ cursor: "pointer", marginRight: 16 }}
+              />
+              <ListItemText
+                primary="UserList"
+                onClick={() => navigate("/userList")}
+                style={{ cursor: "pointer" }}
+              />
+              <ListItemText
+                primary="UserItems"
+                onClick={() => navigate("/useritems")}
+                style={{ cursor: "pointer" }}
+              />
             </ListItem>
           )}
           <ListItem button onClick={() => navigate("/dashboard")}>
@@ -157,7 +172,12 @@ function Header() {
   return (
     <AppBar position="static" color={appBarColor}>
       <Toolbar>
-        <IconButton edge="start" color="inherit" aria-label="logo" onClick={() => navigate("/home")}>
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="logo"
+          onClick={() => navigate("/home")}
+        >
           <img
             className="logo"
             src="https://thumbs.dreamstime.com/b/plastic-recycling-logo-template-waste-icon-separate-258275432.jpg"
@@ -167,20 +187,49 @@ function Header() {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1, ml: 1 }}>
           Plastic Recycling
         </Typography>
-        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          
-          <Button color="inherit" onClick={handleOpenDialog}>Contact Us</Button>
+        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Button color="inherit" onClick={handleOpenDialog}>
+            Contact Us
+          </Button>
           {!isLoggedIn ? (
             <>
-              <Button color="inherit" onClick={() => navigate("/homepage")}>Home</Button>
-              <Button color="inherit" onClick={() => navigate("/login")}>Login</Button>
-              <Button color="inherit" onClick={() => navigate("/signin")}>Sign Up</Button>
+              <Button color="inherit" onClick={() => navigate("/homepage")}>
+                Home
+              </Button>
+              <Button color="inherit" onClick={() => navigate("/login")}>
+                Login
+              </Button>
+              <Button color="inherit" onClick={() => navigate("/signin")}>
+                Sign Up
+              </Button>
             </>
           ) : (
             <>
-              <Button color="inherit" onClick={() => navigate("/dashboard")}>Dashboard</Button>
-              {userRole === "Admin" && <Button color="inherit" onClick={() => navigate("/contactlist")}>Contact List</Button>}
-              <Button color="inherit" onClick={handleLogout}>Logout</Button>
+              <Button color="inherit" onClick={() => navigate("/dashboard")}>
+                Dashboard
+              </Button>
+              <Button color="inherit" onClick={()=>navigate("/items")}>ItemForm</Button>
+              {userRole === "Admin" && (
+                <Button
+                  color="inherit"
+                  onClick={() => navigate("/contactlist")}
+                >
+                  Contact List
+                </Button>
+              )}
+              {userRole === "Admin" && (
+                <Button color="inherit" onClick={() => navigate("/userlist")}>
+                  User List
+                </Button>
+              )}
+              {userRole === "Admin" && (
+                <Button color="inherit" onClick={() => navigate("/useritems")}>
+                  Items
+                </Button>
+              )}
+              <Button color="inherit" onClick={handleLogout}>
+                Logout
+              </Button>
               <IconButton color="inherit" onClick={handleMenuOpen}>
                 <AccountCircle />
               </IconButton>
@@ -188,7 +237,7 @@ function Header() {
           )}
         </Box>
         {/* Hamburger Menu for Mobile */}
-        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+        <Box sx={{ display: { xs: "flex", md: "none" } }}>
           <IconButton color="inherit" onClick={toggleDrawer(true)}>
             <MenuIcon />
           </IconButton>
@@ -205,18 +254,25 @@ function Header() {
         onClose={handleMenuClose}
         anchorOrigin={{
           vertical: "top",
-          horizontal: "right",
+          horizontal: "right"
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "right",
+          horizontal: "right"
         }}
       >
-        <MenuItem onClick={() => openExternalLink("https://www.prestonplastics.co.uk/news")}>NewsLetter</MenuItem>
-        <MenuItem onClick={()=>navigate("/stories")}>Stories</MenuItem>
-        <MenuItem onClick={()=>navigate("/chart")}>Reports</MenuItem>
-        <MenuItem onClick={()=>navigate("/event")}>Events</MenuItem>
-        <MenuItem onClick={()=>navigate("/ideas")}>Ideas</MenuItem>
+        <MenuItem
+          onClick={() =>
+            openExternalLink("https://www.prestonplastics.co.uk/news")
+          }
+        >
+          NewsLetter
+        </MenuItem>
+        <MenuItem onClick={() => navigate("/stories")}>Stories</MenuItem>
+        <MenuItem onClick={() => navigate("/chart")}>Reports</MenuItem>
+        <MenuItem onClick={() => navigate("/event")}>Events</MenuItem>
+        <MenuItem onClick={() => navigate("/ideas")}>Ideas</MenuItem>
+        <MenuItem onClick={()=>navigate("/recyclehistory")}>Recycle Tracking</MenuItem>
       </Menu>
     </AppBar>
   );
