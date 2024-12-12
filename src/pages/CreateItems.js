@@ -12,6 +12,7 @@ import {
 import apiRequest from "../utilities/ApiRequest";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { createItemDetails } from "../utilities/commonApis";
 
 function CreateItems() {
   // Form state
@@ -39,7 +40,7 @@ function CreateItems() {
     e.preventDefault();
     try {
       const response = await apiRequest(
-        "/api/ItemDetails/Create",
+        createItemDetails,
         "POST",
         formData
       );

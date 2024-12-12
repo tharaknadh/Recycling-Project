@@ -4,6 +4,7 @@ import { firestore } from '../service/firebase'; // Import your Firestore instan
 import { collection, addDoc } from 'firebase/firestore';
 import { getDocs, query } from 'firebase/firestore';
 import apiRequest from '../utilities/ApiRequest';
+import { createContactUS } from '../utilities/commonApis';
 
 const Contactus = ({ open, onClose }) => {
   const [name, setName] = useState('');
@@ -22,7 +23,7 @@ const Contactus = ({ open, onClose }) => {
     };
     try {
       // await addDoc(collection(firestore, 'ContactUs'), contactData);
-      const response1 = await apiRequest('/api/ContactUS/Create', 'POST', contactData);
+      const response1 = await apiRequest(createContactUS, 'POST', contactData);
       if(response1){
         setName('');
         setEmail('');

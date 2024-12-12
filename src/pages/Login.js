@@ -7,6 +7,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { auth } from './../service/firebase'; // Adjust the path as necessary
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import apiRequest from '../utilities/ApiRequest';
+import { setUserSession } from '../service/cacheSessions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -136,6 +137,7 @@ const LoginPage = () => {
       if(response1 === "Valid"){
         localStorage.setItem('authToken',response1);
         localStorage.setItem('userRole', role); // Save role as User or Admin
+        setUserSession(response1, password );
         navigate('/dashboard')}
         
         // Store auth token and role in local storage
@@ -145,6 +147,7 @@ const LoginPage = () => {
         navigate('/dashboard');
       } catch (error) {
         console.log("Madhu1234");
+        setUserSession("user", password );
         localStorage.setItem('authToken',"Valid");
         localStorage.setItem('userRole', role);
         
