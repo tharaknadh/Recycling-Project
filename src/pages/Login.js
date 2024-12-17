@@ -6,6 +6,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { auth } from './../service/firebase'; // Adjust the path as necessary
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import apiRequest from '../utilities/ApiRequest';
+import { setUserSession } from '../service/cacheSessions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -120,14 +122,21 @@ const LoginPage = () => {
     
     if (!newErrors.email && !newErrors.password && (!newErrors.adminKey || role === 'User')) {
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const userToken = userCredential.user.accessToken;
+        // const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        // const userToken = userCredential.user.accessToken;
+       const response1 = await apiRequest(`/api/Users/SignIn?Email=${encodeURIComponent(email)}&Password=${encodeURIComponent(password)}`, 'POST',{ 
+          Email: email, 
+          Password: password 
+      });
+      if(response1 === "Valid"){
+        localStorage.setItem('authToken',response1);
+        localStorage.setItem('userRole', role); // Save role as User or Admin
+        setUserSession(response1, password );
+        navigate('/dashboard')}; 
         
         // Store auth token and role in local storage
-        localStorage.setItem('authToken', userToken);
-        localStorage.setItem('userRole', role); // Save role as User or Admin
-
-        navigate('/dashboard');
+        // localStorage.setItem('authToken', userToken);
+        // localStorage.setItem('userRole', role); // Save role as User or Admin
       } catch (error) {
         if (error.code === 'auth/user-not-found') {
           setErrors({ ...newErrors, email: 'No account found with this email' });
@@ -142,7 +151,6 @@ const LoginPage = () => {
         }
         console.error('Error logging in:', error.message);
       }
-
       setEmail('');
       setPassword('');
       setAdminKey('');

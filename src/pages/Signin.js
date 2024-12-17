@@ -20,6 +20,7 @@ import { auth, db } from './../service/firebase'; // Adjust the path as necessar
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import PopModel from '../components/Model';
+import apiRequest from '../utilities/ApiRequest';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -98,7 +99,7 @@ const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [confirmPass, setConfirmPass] = useState('');
+  const [ConfirmPassword, setConfirmPass] = useState('');
   const [role, setRole] = useState('User');
   const [errorMessage, setErrorMessage] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
@@ -106,7 +107,7 @@ const Signin = () => {
     email: '',
     password: '',
     name: '',
-    confirmPass: '',
+    ConfirmPassword: '',
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -117,7 +118,7 @@ const Signin = () => {
   };
 
   const handleSubmit = async () => {
-    const newErrors = { email: '', password: '', confirmPass: '', name: '' };
+    const newErrors = { email: '', password: '', ConfirmPassword: '', name: '' };
 
     if (!email) {
       newErrors.email = 'Email is required';
@@ -128,43 +129,60 @@ const Signin = () => {
     if (!password) {
       newErrors.password = 'Password is required';
     }
-    if (!confirmPass) {
-      newErrors.confirmPass = 'Confirm Password is required';
-    } else if (confirmPass !== password) {
-      newErrors.confirmPass = 'Passwords do not match';
+    if (!ConfirmPassword) {
+      newErrors.ConfirmPassword = 'Confirm Password is required';
+    } else if (ConfirmPassword !== password) {
+      newErrors.ConfirmPassword = 'Passwords do not match';
     }
     if (!name) {
       newErrors.name = 'Name is required';
     }
 
     setErrors(newErrors);
+    const requestData = {
+      name,
+      email,
+      password,
+      ConfirmPassword,
+      role,
+    };
 
-    if (!newErrors.email && !newErrors.password && !newErrors.confirmPass && !newErrors.name) {
+    if (!newErrors.email && !newErrors.password && !newErrors.ConfirmPassword && !newErrors.name) {
+      // try {
+      //   const userCredential = await createUserWithEmailAndPassword(auth, email, password,ConfirmPassword,name,role);
+      //   const user = userCredential.user;
+      //   // await setDoc(doc(db, 'users', user.uid), {
+      //   //   name,
+      //   //   email,
+      //   //   role,
+      //   // });
+      //   console.log('User signed up:', user);
+      //   navigate("/Login")
+      //   setName('');
+      //   setEmail('');
+      //   setPassword('');
+      //   setConfirmPass('');
+
+      // } catch (error) { 
+      //   console.log("=======",error.code)
+      //   console.error('Error during signup:', error);
+      //   if (error.code === 'auth/email-already-in-use') {
+      //     setErrorMessage('This email is already registered. Please use a different email.');
+      //     setModalOpen(true); // Open the modal
+      //   } else {
+      //     setErrorMessage('An error occurred. Please try again.');
+      //     setModalOpen(true);
+      //   }
+      // }
+
       try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password,confirmPass,name,role);
-        const user = userCredential.user;
-        // await setDoc(doc(db, 'users', user.uid), {
-        //   name,
-        //   email,
-        //   role,
-        // });
-        console.log('User signed up:', user);
-        navigate("/Login")
-        setName('');
-        setEmail('');
-        setPassword('');
-        setConfirmPass('');
-
-      } catch (error) { 
-        console.log("=======",error.code)
-        console.error('Error during signup:', error);
-        if (error.code === 'auth/email-already-in-use') {
-          setErrorMessage('This email is already registered. Please use a different email.');
-          setModalOpen(true); // Open the modal
-        } else {
-          setErrorMessage('An error occurred. Please try again.');
-          setModalOpen(true);
+        const response1 = await apiRequest('/api/Users/SignUp', 'POST', requestData);
+        if (response1 === "Success") {
+          navigate('/dashboard');
+          localStorage.setItem("userRole",role);
         }
+      } catch (error) {
+        console.error("Fetch Error:", error);
       }
     }
   };
@@ -249,10 +267,10 @@ const Signin = () => {
             type={showConfirmPassword ? 'text' : 'password'}
             variant="outlined"
             fullWidth
-            value={confirmPass}
+            value={ConfirmPassword}
             onChange={(e) => setConfirmPass(e.target.value)}
-            error={!!errors.confirmPass}
-            helperText={errors.confirmPass}
+            error={!!errors.ConfirmPassword}
+            helperText={errors.ConfirmPassword}
             className={classes.textField}
             InputProps={{
               endAdornment: (

@@ -60,3 +60,18 @@
   object-position: center;
   border-radius: 8px;
 }
+.carousel-container {
+  margin-bottom: 100px; /* Ensure there is enough space for the footer */
+}
+
+.carousel-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel {
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Optional: Adds a little spacing below the carousel */
+}
