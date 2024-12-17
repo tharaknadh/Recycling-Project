@@ -15,9 +15,35 @@
 //   TextField,
 //   Typography
 // } from "@mui/material";
+// import { styled } from "@mui/system";
 // import apiRequest, { getApiRequest } from "../utilities/ApiRequest";
 // import Footer from "../components/Footer";
 // import Header from "../components/Header";
+
+// // Styled components
+// const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
+//   width: "95%",
+//   margin: "auto",
+//   marginTop: "16px",
+//   boxShadow: theme.shadows[4],
+//   borderRadius: theme.shape.borderRadius,
+// }));
+
+// const StyledTableRow = styled(TableRow)(({ theme }) => ({
+//   transition: "background-color 0.3s, transform 0.2s",
+//   "&:hover": {
+//     backgroundColor: theme.palette.action.hover,
+//     transform: "scale(1.01)",
+//   },
+// }));
+
+// const StyledButton = styled(Button)(({ theme }) => ({
+//   transition: "border-color 0.3s, transform 0.2s",
+//   "&:hover": {
+//     borderColor: theme.palette.primary.main,
+//     transform: "scale(1.05)",
+//   },
+// }));
 
 // function AllUsers() {
 //   const [users, setUsers] = useState([
@@ -168,23 +194,37 @@
 //     }
 //   };
 
+//   const handleClearSearch = () => {
+//     setSearchTerm("");
+//     setFilteredUsers(users);
+//   };
+
 //   return (
 //     <>
 //       <Header />
-//       <div style={{ padding: "16px",marginTop:"50px" }}>
+//       <div style={{ padding: "16px", marginTop: "50px" }}>
 //         <Typography variant="h6" gutterBottom>
 //           Search Users
 //         </Typography>
-//         <TextField
-//           fullWidth
-//           placeholder="Search by name or email"
-//           value={searchTerm}
-//           onChange={(e) => setSearchTerm(e.target.value)}
-//           variant="outlined"
-//           margin="normal"
-//         />
+//         <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+//           <TextField
+//             fullWidth
+//             placeholder="Search by name or email"
+//             value={searchTerm}
+//             onChange={(e) => setSearchTerm(e.target.value)}
+//             variant="outlined"
+//             margin="normal"
+//           />
+//           <Button
+//             variant="contained"
+//             color="secondary"
+//             onClick={handleClearSearch}
+//           >
+//             Clear
+//           </Button>
+//         </div>
 //       </div>
-//       <TableContainer component={Paper}>
+//       <StyledTableContainer component={Paper}>
 //         <Table>
 //           <TableHead>
 //             <TableRow>
@@ -206,30 +246,30 @@
 //             )}
 //             {!loading &&
 //               filteredUsers.map((user) => (
-//                 <TableRow key={user.id}>
+//                 <StyledTableRow key={user.id}>
 //                   <TableCell>{user.id}</TableCell>
 //                   <TableCell>{user.name}</TableCell>
 //                   <TableCell>{user.email}</TableCell>
 //                   <TableCell>{user.role}</TableCell>
 //                   <TableCell>{user.password}</TableCell>
 //                   <TableCell>
-//                     <Button
+//                     <StyledButton
 //                       variant="outlined"
 //                       color="primary"
 //                       onClick={() => handleUpdateClick(user)}
 //                       style={{ marginRight: "10px" }}
 //                     >
 //                       Update
-//                     </Button>
-//                     <Button
+//                     </StyledButton>
+//                     <StyledButton
 //                       variant="outlined"
 //                       color="error"
 //                       onClick={() => handleDelete(user.id)}
 //                     >
 //                       Delete
-//                     </Button>
+//                     </StyledButton>
 //                   </TableCell>
-//                 </TableRow>
+//                 </StyledTableRow>
 //               ))}
 //             {!loading && filteredUsers.length === 0 && (
 //               <TableRow>
@@ -240,7 +280,7 @@
 //             )}
 //           </TableBody>
 //         </Table>
-//       </TableContainer>
+//       </StyledTableContainer>
 //       <Footer />
 
 //       {/* Update Modal */}
@@ -311,6 +351,7 @@ import {
   Typography
 } from "@mui/material";
 import { styled } from "@mui/system";
+import { Delete, Edit, Clear } from "@mui/icons-material"; // Import icons
 import apiRequest, { getApiRequest } from "../utilities/ApiRequest";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -332,89 +373,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const StyledButton = styled(Button)(({ theme }) => ({
-  transition: "border-color 0.3s, transform 0.2s",
+const StyledIconButton = styled(Button)(({ theme }) => ({
+  minWidth: "40px",
+  padding: "8px",
+  transition: "transform 0.2s",
   "&:hover": {
-    borderColor: theme.palette.primary.main,
-    transform: "scale(1.05)",
+    transform: "scale(1.1)",
   },
 }));
 
 function AllUsers() {
-  const [users, setUsers] = useState([
-    {
-      id: 5,
-      name: "Madhu",
-      email: "test@gmail.com",
-      encryption: "gCNGRn1W0MERaTCQjbifgQ==",
-      password: "test@123",
-      confirmPassword: "test@123",
-      role: "User"
-    },
-    {
-      id: 6,
-      name: "test",
-      email: "test@gmail.com",
-      encryption: "j3iQKb5/3HLIb8p7tc8QLA==",
-      password: "okok",
-      confirmPassword: "okok",
-      role: "User"
-    },
-    {
-      id: 7,
-      name: "role",
-      email: "role@gmail.com",
-      encryption: "j3iQKb5/3HLIb8p7tc8QLA==",
-      password: "okok",
-      confirmPassword: "okok",
-      role: "Admin"
-    },
-    {
-      id: 8,
-      name: "email",
-      email: "Madhu@gmail.com",
-      encryption: "j3iQKb5/3HLIb8p7tc8QLA==",
-      password: "okok",
-      confirmPassword: "okok",
-      role: "Admin"
-    },
-    {
-      id: 9,
-      name: "string",
-      email: "string",
-      encryption: "Z9G/YRsXA/g2TBSXr3XWfA==",
-      password: "string",
-      confirmPassword: "string",
-      role: "string"
-    },
-    {
-      id: 10,
-      name: "string",
-      email: "string",
-      encryption: "Z9G/YRsXA/g2TBSXr3XWfA==",
-      password: "string",
-      confirmPassword: "string",
-      role: "string"
-    },
-    {
-      id: 11,
-      name: "string",
-      email: "string",
-      encryption: "Z9G/YRsXA/g2TBSXr3XWfA==",
-      password: "string",
-      confirmPassword: "string",
-      role: "string"
-    },
-    {
-      id: 12,
-      name: "TARAK",
-      email: "Madhu@gmail.com",
-      encryption: "j3iQKb5/3HLIb8p7tc8QLA==",
-      password: "okok",
-      confirmPassword: "okok",
-      role: "User"
-    }
-  ]);
+  const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
@@ -510,13 +479,13 @@ function AllUsers() {
             variant="outlined"
             margin="normal"
           />
-          <Button
+          <StyledIconButton
             variant="contained"
             color="secondary"
             onClick={handleClearSearch}
           >
-            Clear
-          </Button>
+            <Clear />
+          </StyledIconButton>
         </div>
       </div>
       <StyledTableContainer component={Paper}>
@@ -548,21 +517,21 @@ function AllUsers() {
                   <TableCell>{user.role}</TableCell>
                   <TableCell>{user.password}</TableCell>
                   <TableCell>
-                    <StyledButton
+                    <StyledIconButton
                       variant="outlined"
                       color="primary"
                       onClick={() => handleUpdateClick(user)}
                       style={{ marginRight: "10px" }}
                     >
-                      Update
-                    </StyledButton>
-                    <StyledButton
+                      <Edit />
+                    </StyledIconButton>
+                    <StyledIconButton
                       variant="outlined"
                       color="error"
                       onClick={() => handleDelete(user.id)}
                     >
-                      Delete
-                    </StyledButton>
+                      <Delete />
+                    </StyledIconButton>
                   </TableCell>
                 </StyledTableRow>
               ))}
@@ -604,7 +573,7 @@ function AllUsers() {
             <TextField
               fullWidth
               margin="dense"
-              label="Role"
+              label="Password"
               value={currentUser.password}
               onChange={(e) =>
                 setCurrentUser({ ...currentUser, password: e.target.value })

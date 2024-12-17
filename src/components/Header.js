@@ -395,7 +395,7 @@ function Header() {
         <MenuItem onClick={() => navigate("/chart")}>Reports</MenuItem>
         <MenuItem onClick={() => navigate("/event")}>Events</MenuItem>
         <MenuItem onClick={() => navigate("/ideas")}>Ideas</MenuItem>
-        <MenuItem onClick={()=>navigate("/recyclehistory")}>Recycle Tracking</MenuItem>
+        <MenuItem onClick={()=>navigate("/recyclehistory")}>Tracking History</MenuItem>
       </Menu>
     </AppBar>
   );

@@ -199,11 +199,11 @@ function CreateItems() {
       <Box className="animated-background">
         <Paper className="form-container">
           <Typography variant="h6" gutterBottom>
-            Create Item Details
+            Enter Details
           </Typography>
           <form onSubmit={handleSubmit} className="animated-form">
             <TextField
-              label="Recycle Name"
+              label="Name"
               name="recycleName"
               fullWidth
               margin="normal"

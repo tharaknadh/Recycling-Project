@@ -120,6 +120,7 @@ function App() {
         <Route path="/chart" element={<PrivateRoute element={<BarChart />}/>} />
         <Route path="/stories" element={<PrivateRoute element={<Stories />}/>} />
         <Route path="/ideas" element={<PrivateRoute element={<Ideas />}/>} />
+        <Route path="homepage" element={<Homepage />} />
         <Route path="home" element={<Homepage />} />
         <Route path="/items" element={<PrivateRoute element={<CreateItems/>}/>}/>
         <Route path="/recyclehistory" element={<PrivateRoute element={<RecycleHistoryTracking/>}/>}/>
