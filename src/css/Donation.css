@@ -77,4 +77,135 @@
     color: #16a085;
     font-weight: bold;
   }
+
+
+
+  .donation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .donation-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  input[type="number"], button {
+    margin: 8px 0;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  input[type="number"]:focus, button:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .preset-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+  }
+  
+  .preset-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .preset-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    width:100%
+  }
+  
+  .card-details > div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-element-container {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .card-element-container:hover {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
+  
+  .submit-button {
+    background-color: #28a745;
+    color: white;
+    padding: 15px;
+    border: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  .submit-button:hover {
+    background-color: #218838;
+  }
+  
+  .submit-button:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+  }
+  
+  .donation-message {
+    font-size: 16px;
+    color: #333;
+    margin-top: 15px;
+  }
+  
+  .donation-message.success {
+    color: #28a745;
+  }
+  
+  .donation-message.error {
+    color: #dc3545;
+  }
+  
   

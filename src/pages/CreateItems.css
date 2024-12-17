@@ -1,0 +1,61 @@
+/* Smooth animations and interactive styles */
+
+/* Background animation */
+.animated-background {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+  background-size: 400% 400%;
+  animation: gradientBackground 10s ease infinite;
+}
+
+/* Gradient animation for background */
+@keyframes gradientBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Form container styling */
+.form-container {
+  max-width: 600px;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  background: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Animated input fields */
+.animated-input {
+  transition: all 0.3s ease;
+}
+
+.animated-input:focus-within {
+  border: 2px solid #4caf50 !important; /* Green border */
+  outline: none;
+  box-shadow: 0px 0px 8px rgba(76, 175, 80, 0.6);
+  background: rgba(240, 255, 240, 0.5);
+}
+
+/* Submit button */
+.submit-button {
+  background-color: #3f51b5;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #1e3a8a;
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+}

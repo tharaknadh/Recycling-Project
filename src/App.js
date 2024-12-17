@@ -22,6 +22,7 @@ import AllUsers from "./pages/AllUsers";
 import CreateItems from "./pages/CreateItems";
 import CreateItemForm from "./pages/ItemsApprovals";
 import RecycleHistoryTracking from "./pages/RecycleHistoryTracking";
+import AdminBarChat from "./pages/AdminBarChat";
 
 function App() {
   // Helper function to check if a user is logged in and get their role
@@ -71,6 +72,10 @@ function App() {
             isAuthenticated() ? <Navigate to="/dashboard" replace /> : <Home />
           }
         />
+         <Route
+          path="/dashboard"
+          element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
+        />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/aboutUs" element={<PrivateRoute element={<About />} />} />
@@ -96,6 +101,10 @@ function App() {
           path="/admin"
           element={<AdminRoute element={<AdminHome />} />}
         />
+         <Route
+          path="/adminBarChat"
+          element={<AdminRoute element={<AdminBarChat />} />}
+        />
         {/* <Route path="/contactlist" element={<ContactList />}/> */}
 
         <Route
@@ -111,7 +120,7 @@ function App() {
         <Route path="/chart" element={<PrivateRoute element={<BarChart />}/>} />
         <Route path="/stories" element={<PrivateRoute element={<Stories />}/>} />
         <Route path="/ideas" element={<PrivateRoute element={<Ideas />}/>} />
-        <Route path="homepage" element={<Homepage />} />
+        <Route path="home" element={<Homepage />} />
         <Route path="/items" element={<PrivateRoute element={<CreateItems/>}/>}/>
         <Route path="/recyclehistory" element={<PrivateRoute element={<RecycleHistoryTracking/>}/>}/>
 

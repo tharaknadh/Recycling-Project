@@ -1,21 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import App from './App'; // Assuming App component is in the same directory
 
+// Create Material-UI theme
 const theme = createTheme();
+
+// Load Stripe with your publishable key
+const stripePromise = loadStripe('pk_test_51QWsk0GCAqMShoTQrbURSGBCM8eDdGSFknIAlYT0gU3QvguReV5c0Iv1bgS5wAMtkt7oOROB5o5PiJbyAYdmwAQP00cOhVU3zW'); // Replace with your actual Stripe key
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-        <App /> 
-    </ThemeProvider> 
+      <Elements stripe={stripePromise}>
+        <App />
+      </Elements>
+    </ThemeProvider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

@@ -124,34 +124,20 @@ const LoginPage = () => {
       try {
         // const userCredential = await signInWithEmailAndPassword(auth, email, password);
         // const userToken = userCredential.user.accessToken;
-
-
-        const response1 = await apiRequest(`/api/Users/SignIn?Email=${encodeURIComponent(email)}&Password=${encodeURIComponent(password)}`, 'POST',{ 
+       const response1 = await apiRequest(`/api/Users/SignIn?Email=${encodeURIComponent(email)}&Password=${encodeURIComponent(password)}`, 'POST',{ 
           Email: email, 
           Password: password 
       });
-        console.log("Madhu",response1);
-        
-        // Store auth token and role in local storage
-        
       if(response1 === "Valid"){
         localStorage.setItem('authToken',response1);
         localStorage.setItem('userRole', role); // Save role as User or Admin
         setUserSession(response1, password );
-        navigate('/dashboard')}
+        navigate('/dashboard')}; 
         
         // Store auth token and role in local storage
         // localStorage.setItem('authToken', userToken);
         // localStorage.setItem('userRole', role); // Save role as User or Admin
-
-        navigate('/dashboard');
       } catch (error) {
-        console.log("Madhu1234");
-        setUserSession("user", password );
-        localStorage.setItem('authToken',"Valid");
-        localStorage.setItem('userRole', role);
-        
-        navigate('/dashboard')
         if (error.code === 'auth/user-not-found') {
           setErrors({ ...newErrors, email: 'No account found with this email' });
         } else if (error.code === 'auth/wrong-password') {
@@ -165,7 +151,6 @@ const LoginPage = () => {
         }
         console.error('Error logging in:', error.message);
       }
-
       setEmail('');
       setPassword('');
       setAdminKey('');

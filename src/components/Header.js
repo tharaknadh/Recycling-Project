@@ -31,6 +31,7 @@ function Header() {
   const [openDialog, setOpenDialog] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [appBarColor, setAppBarColor] = useState("primary");
+  const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,6 +39,21 @@ function Header() {
     const role = localStorage.getItem("userRole");
     setIsLoggedIn(!!authToken);
     setUserRole(role);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -133,6 +149,11 @@ function Header() {
                 onClick={() => navigate("/useritems")}
                 style={{ cursor: "pointer" }}
               />
+              <ListItemText
+                primary="AdminChart"
+                onClick={() => navigate("/adminBarChat")}
+                style={{ cursor: "pointer", marginRight: 16 }}
+              />
             </ListItem>
           )}
           <ListItem button onClick={() => navigate("/dashboard")}>
@@ -170,7 +191,13 @@ function Header() {
   );
 
   return (
-    <AppBar position="static" color={appBarColor}>
+    <AppBar  position="fixed"
+          elevation={scrolled ? 4 : 0}
+          sx={{
+            backgroundColor: scrolled ? "rgba(0, 0, 0, 0.9)" : "rgba(0, 0, 0, 0.5)",
+            transition: "background-color 0.3s ease-in-out",
+            boxShadow: scrolled ? 3 : "none",
+          }}>
       <Toolbar>
         <IconButton
           edge="start"
@@ -188,29 +215,85 @@ function Header() {
           Plastic Recycling
         </Typography>
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <Button color="inherit" onClick={handleOpenDialog}>
+          <Button  sx={{
+              color: "white",
+              mx: 1,
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "#4caf50",
+                color: "black",
+              },
+            }} color="inherit" onClick={handleOpenDialog}>
             Contact Us
           </Button>
           {!isLoggedIn ? (
             <>
-              <Button color="inherit" onClick={() => navigate("/homepage")}>
+              <Button sx={{
+              color: "white",
+              mx: 1,
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "#4caf50",
+                color: "black",
+              },
+            }}  color="inherit" onClick={() => navigate("/homepage")}>
                 Home
               </Button>
-              <Button color="inherit" onClick={() => navigate("/login")}>
+              <Button sx={{
+              color: "white",
+              mx: 1,
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "#4caf50",
+                color: "black",
+              },
+            }}  color="inherit" onClick={() => navigate("/login")}>
                 Login
               </Button>
-              <Button color="inherit" onClick={() => navigate("/signin")}>
+              <Button sx={{
+              color: "white",
+              mx: 1,
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "#4caf50",
+                color: "black",
+              },
+            }}  color="inherit" onClick={() => navigate("/signin")}>
                 Sign Up
               </Button>
             </>
           ) : (
             <>
-              <Button color="inherit" onClick={() => navigate("/dashboard")}>
+              <Button sx={{
+              color: "white",
+              mx: 1,
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "#4caf50",
+                color: "black",
+              },
+            }}  color="inherit" onClick={() => navigate("/dashboard")}>
                 Dashboard
               </Button>
-              <Button color="inherit" onClick={()=>navigate("/items")}>ItemForm</Button>
+              <Button sx={{
+              color: "white",
+              mx: 1,
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "#4caf50",
+                color: "black",
+              },
+            }}  color="inherit" onClick={()=>navigate("/items")}>ItemForm</Button>
               {userRole === "Admin" && (
-                <Button
+                <Button sx={{
+                  color: "white",
+                  mx: 1,
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#4caf50",
+                    color: "black",
+                  },
+                }} 
                   color="inherit"
                   onClick={() => navigate("/contactlist")}
                 >
@@ -218,16 +301,56 @@ function Header() {
                 </Button>
               )}
               {userRole === "Admin" && (
-                <Button color="inherit" onClick={() => navigate("/userlist")}>
+                <Button sx={{
+                  color: "white",
+                  mx: 1,
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#4caf50",
+                    color: "black",
+                  },
+                }} 
+                  color="inherit"
+                  onClick={() => navigate("/adminBarChat")}
+                >
+                  Admin Chart
+                </Button>
+              )}
+              {userRole === "Admin" && (
+                <Button sx={{
+                  color: "white",
+                  mx: 1,
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#4caf50",
+                    color: "black",
+                  },
+                }}  color="inherit" onClick={() => navigate("/userlist")}>
                   User List
                 </Button>
               )}
               {userRole === "Admin" && (
-                <Button color="inherit" onClick={() => navigate("/useritems")}>
+                <Button sx={{
+                  color: "white",
+                  mx: 1,
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#4caf50",
+                    color: "black",
+                  },
+                }}  color="inherit" onClick={() => navigate("/useritems")}>
                   Items
                 </Button>
               )}
-              <Button color="inherit" onClick={handleLogout}>
+              <Button sx={{
+              color: "white",
+              mx: 1,
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "#4caf50",
+                color: "black",
+              },
+            }}  color="inherit" onClick={handleLogout}>
                 Logout
               </Button>
               <IconButton color="inherit" onClick={handleMenuOpen}>
@@ -279,3 +402,4 @@ function Header() {
 }
 
 export default Header;
+
